@@ -30,7 +30,7 @@ def gtall(name, d):
             try:
                 dct = json.loads(
                         requests.get(
-                f'https://curiouscat.me/api/v2/profile?username={name}&count=100' + f'&max_timestamp={last}' * (last != 0)
+                f'https://curiouscat.live/api/v2/profile?username={name}&count=100' + f'&max_timestamp={last}' * (last != 0)
                                     ).content.decode()
                         )
                 db.write(''.join(add(dct['posts'], n + 1)))
@@ -44,14 +44,14 @@ def gtall(name, d):
                 break
 
 def foloDetail(name, identifier):
-    fls = json.loads(requests.get(f'https://curiouscat.me/api/v2/profile/{identifier}?username={name}').content.decode())
+    fls = json.loads(requests.get(f'https://curiouscat.live/api/v2/profile/{identifier}?username={name}').content.decode())
     with open(f'{name}\\{identifier}.txt','w') as fs:
         for fn, flwr in enumerate(fls['result']):
-            fs.write(f'\n\n{fn+1}:\n{flwr["username"]}\nhttps://curiouscat.me/{flwr["username"]}')
+            fs.write(f'\n\n{fn+1}:\n{flwr["username"]}\nhttps://curiouscat.live/{flwr["username"]}')
 
 def cc():
     name = input('Username: ')
-    dct = json.loads(requests.get(f'https://curiouscat.me/api/v2/profile?username={name}').content.decode())
+    dct = json.loads(requests.get(f'https://curiouscat.live/api/v2/profile?username={name}').content.decode())
     if 'error' in dct:
         print("\nProfile doesn't exist!")
         return
